@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="test" default="zip-test" basedir=".">
+    <description>Test Build File</description>
+
+    <loadproperties srcfile="build.properties" />
+
+    <property name="dist" location="dist" />
+
+    <target name="init">
+        <tstamp>
+            <format property="FILE_TSTAMP" pattern="yyyy-MM-dd_HH.mm" />
+        </tstamp>
+
+        <!--creates the build directory-->
+        <mkdir dir="${dist}" />
+    </target>
+
+    <target name="zip-test" depends="init" description="Creates a dist-zip that contains most of the projects files.">
+        <delete file="${dist}/test-${app.version}.tar.gz" quiet="true" />
+        <tar destfile="${dist}/test-${app.version}.tar.gz" basedir="." compression="gzip"
+            excludes=".metadata/**, RemoteSystemsTempFiles/**, **/local-files/**, **/output/**, **/log/**, **/build/**, , **/dist/**, **/classes-eclipse/**, **/tmp/**, **/tmp-junit/**, **/slurp/**, **/geoip-db/GeoIPASNum.dat, **/geoip-db/GeoC*.dat, **/geoip-db/GeoLite*.dat, **/*_private.properties">
+        </tar>
+    </target>
+
+</project>
